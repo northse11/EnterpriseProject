@@ -5,7 +5,8 @@
 Design Document
 
 Steven North,
-Dikshya Thapa
+Dikshya Thapa,
+Kwasi Amponsah
 
 ## Introduction
 Our application allows users to keep track of their favorite UFC fighters, as well as find information on the up and coming prospects. They will be able to find fighters by name or weight class, and find pertinent information like wins, losses, and fighting styles. The data will be sourced from our master database containing the active fighter roster.  
@@ -96,3 +97,35 @@ Weight class and fighter data are available and accessible
 **When** a user chooses to find fighters by weight class with name “middleweight”
 
 **Then** UFC Stats will return a list of type fighter with the fighters whose weight resides in the weight class, by rank order 
+
+## Class Diagram
+
+<img width="686" alt="Image" src="https://github.com/user-attachments/assets/68a80ff9-0840-4ed4-8f6d-e71bb08cbc7c" />
+
+### Class Diagram Description
+
+**Fighter**: Noun class that represents an individual fighter
+
+**Weight Class**: Noun class that represents a weight class
+
+**IFighterDAO**: Interface to find and parse Fighter JSON
+
+**IWeightclassDAO**: Interface to find and parse Weight Class JSON
+
+## JSON Schema
+
+{ "type" : "WeightClass", "properties" : { "classId" : { "type" : "integer" }, "className" : { "type" : "string" },  "minWeight" : { "type" : "double" }, "maxWeight" : { "type" : "double" },  "activeFighters" : { "type" : "List{type: Fighter}" },  "activeChamp" : { "type" : "string" } } }
+
+{ "type" : "Fighter", "properties" : { "fighterId" : { "type" : "integer" }, "age" : { "type" : "integer" },  "weight" : { "type" : "double" },  "wins" : { "type" : "integer" } ,  "losses" : { "type" : "integer" },  "noContests" : { "type" : "integer" },  "ranking" : { "type" : "integer" },  "fightStyle" : { "type" : "string" } } } 
+
+## Scrum Roles
+
+Scrum Master/Product Owner/DevOps/GitHub Admin - Steve North
+
+UI Specialist - Dikshya Thapa
+
+Business Logic and Persistence Specialist - Steve North/Kwasi Amponsah
+
+## Weekly Meeting
+
+Wednesday at 5pm using Microsoft Teams
