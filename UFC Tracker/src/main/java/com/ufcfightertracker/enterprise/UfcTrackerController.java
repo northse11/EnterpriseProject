@@ -8,9 +8,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UfcTrackerController {
@@ -23,7 +25,18 @@ public class UfcTrackerController {
      * @return
      */
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        Fighter fighter = new Fighter();
+        fighter.setId(2);
+        fighter.setName("Max Holloway");
+        fighter.setAge(33);
+        fighter.setWeight(135.00);
+        fighter.setStyle("Striker");
+        fighter.setWins(26);
+        fighter.setLosses(8);
+        fighter.setTies(0);
+        fighter.setRank(2);
+        model.addAttribute(fighter);
         return "start";
     }
 
@@ -31,6 +44,18 @@ public class UfcTrackerController {
     @ResponseBody
     public List<Fighter> fetchAllFighters() {
         return fighterService.fetchAll();
+    }
+
+    @RequestMapping("/saveFighter")
+    public String saveFighter(Fighter fighter) {
+        try {
+            fighterService.save(fighter);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return "start";
+        }
+        return "start";
     }
 
     @GetMapping("/fighter/{id}")
@@ -66,5 +91,15 @@ public class UfcTrackerController {
         catch(Exception e) {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/fighters")
+    public ResponseEntity searchFighters(@RequestParam Map<String,String> requestParams){
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @RequestMapping("/sustainability")
+    public String sustainability() {
+        return "sustainability";
     }
 }
