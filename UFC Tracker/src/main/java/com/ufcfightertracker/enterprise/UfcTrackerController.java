@@ -21,6 +21,7 @@ public class UfcTrackerController {
 
     @Autowired
     IFighterService fighterService;
+    @Autowired
     IWeightClassService weightClassService;
 
     /**

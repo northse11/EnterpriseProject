@@ -39,7 +39,7 @@ public class WeightClassServiceStub implements IWeightClassService{
 
     @Override
     public List<WeightClass> fetchAll() {
-        return weightClassDAO.getAllWeightClasses();
+        return weightClassDAO.fetchAll();
     }
 
     @Override

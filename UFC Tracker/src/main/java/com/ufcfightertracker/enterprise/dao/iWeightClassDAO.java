@@ -7,7 +7,7 @@ import java.util.List;
 public interface iWeightClassDAO {
     WeightClass saveWeightClass(WeightClass weightClass) throws Exception;
 
-    List<WeightClass> getAllWeightClasses();
+    List<WeightClass> fetchAll();
 
     WeightClass getWeightClassById(int id);
 

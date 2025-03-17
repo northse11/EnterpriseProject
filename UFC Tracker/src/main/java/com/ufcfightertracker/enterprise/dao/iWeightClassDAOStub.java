@@ -21,7 +21,7 @@ public class iWeightClassDAOStub implements iWeightClassDAO {
     }
 
     @Override
-    public List<WeightClass> getAllWeightClasses() {
+    public List<WeightClass> fetchAll() {
         List<WeightClass> returnWeightClasses = new ArrayList(allWeightClasses.values());
         return returnWeightClasses;
     }
