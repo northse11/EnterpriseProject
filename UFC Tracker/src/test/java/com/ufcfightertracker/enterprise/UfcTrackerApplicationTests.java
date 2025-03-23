@@ -18,6 +18,7 @@ class UfcTrackerApplicationTests {
 
     private IFighterService fighterService;
     private Fighter fighter = new Fighter();
+    private Fighter createdFighter();
 
     @MockBean
     private iFighterDAO fighterDAO;
@@ -82,10 +83,11 @@ class UfcTrackerApplicationTests {
     void saveFighter_validateReturnFighterWithAllAttributes() throws Exception {
         givenFighterDataIsAvailable();
         whenUserCreatesANewFighterAndSaves();
-        thenCreateNewFighterRecordAndReturnIt();
+        thenSavedFigherIsReturnedIdentical();
     }
 
     private void whenUserCreatesANewFighterAndSaves() {
+        fighter = new fighter();
         fighter.setName("Michel Pereira");
         fighter.setAge(31);
         fighter.setWeight(185.00);
@@ -94,10 +96,10 @@ class UfcTrackerApplicationTests {
         fighter.setLosses(12);
         fighter.setTies(0);
         fighter.setRank(13);
+        createdFighter = fighterService.save(fighter);
     }
 
-    private void thenCreateNewFighterRecordAndReturnIt() throws Exception {
-        Fighter createdFighter = fighterService.save(fighter);
+    private void thenSavedFigherIsReturnedIdentical() throws Exception {
         assertEquals(fighter, createdFighter);
         verify(fighterDAO, atLeastOnce()).save(fighter);
     }
