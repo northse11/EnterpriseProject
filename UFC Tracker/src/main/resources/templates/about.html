@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About UFC Fighter Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <style>
+        .form-control {
+            background-color: royalblue;
+            color: white;
+        }
+
+        img {
+            float: left;
+            padding: 75px;
+            width: 50%;
+        }
+
+        p {
+            font-size: 1.3em;
+            line-height: 2.0;
+            text-align: center;
+            padding: 75px;
+        }
+    </style>
+</head>
+<body>
+    <div th:replace="fragments/topnav :: navbar"></div>
+    <img src="https://images.fineartamerica.com/images/artworkimages/medium/3/rivalry-in-motion-bob-kramer.jpg" alt="UFC Fighters">
+    <p>Our application allows users to keep track of their favorite UFC fighters, as well as find information on the up and coming prospects. They will be able to find fighters by name or weight class, and find pertinent information like wins, losses, and fighting styles. The data will be sourced from our master database containing the active fighter roster. Users can generate a list of fighters given a weight class, or will be able to find single fighters by name. This generated report will allow them to follow along with their favorites or get insight on names they are not yet familiar with. Additionally, as new fighters make their debut, users will be able to add them to the system, given their name, weight, and pre-ufc record. Users will have the option to interact with our application through a simple UI or by using a set of RESTful service endpoints to exchange data.</p>
+</body>
+</html>
