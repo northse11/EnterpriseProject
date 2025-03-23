@@ -12,12 +12,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 
 @Controller
 public class UfcTrackerController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UfcTrackerController.class);
 
     @Autowired
     IFighterService fighterService;
@@ -67,7 +71,7 @@ public class UfcTrackerController {
             fighterService.save(fighter);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error saving fighter: " + fighter, e);
             return "start";
         }
         return "start";
@@ -79,7 +83,7 @@ public class UfcTrackerController {
             weightClassService.save(weightClass);
         }
         catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Error saving weight class: " + weightClass, e);
             return "start";
         }
         return "start";
@@ -107,11 +111,11 @@ public class UfcTrackerController {
     public Fighter createFighter(@RequestBody Fighter fighter)
     {
         Fighter newFighter = null;
-        try{
+        try {
             newFighter = fighterService.save(fighter);
-        }
-        catch(Exception e){
-            //TODO add logging
+            logger.info("Fighter created successfully: {}", newFighter);
+        } catch (Exception e) {
+            logger.error("Error creating fighter: " + fighter, e);
         }
         return newFighter;
     }
@@ -123,9 +127,10 @@ public class UfcTrackerController {
         WeightClass newWeightClass = null;
         try{
             newWeightClass = weightClassService.save(weightClass);
+            logger.info("WeightClass created successfully: {}", newWeightClass);
         }
         catch(Exception e){
-            //TODO add logging
+            logger.error("Error creating weightClass: " + weightClass, e);
     }
         return newWeightClass;
     }
