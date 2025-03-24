@@ -13,10 +13,24 @@ public interface IFighterService {
      */
     Fighter fetchById(int id);
 
-    void delete(int id) throws Exception;
+    /**
+     * Deletes a fighter with specified ID
+     * @param id a unique identifier for each fighter
+     * @return true if fighter deletion was successful, false if not found or failed
+     */
+    boolean delete(int id) throws Exception;
 
+    /**
+     * Posts provided fighter to database
+     * @param fighter data of fighter to be added
+     * @return fighter data that was entered, null if unsuccessful
+     */
     Fighter save(Fighter fighter) throws Exception;
 
+    /**
+     * Fetches all fighters in database
+     * @return list of all fighters
+     */
     List<Fighter> fetchAll();
 
     /**

@@ -28,8 +28,9 @@ public class WeightClassServiceStub implements IWeightClassService{
     }
 
     @Override
-    public void delete(int id) throws Exception {
+    public boolean delete(int id) throws Exception {
         weightClassDAO.deleteWeightClass(id);
+        return true;
     }
 
     @Override
