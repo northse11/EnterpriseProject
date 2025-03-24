@@ -19,6 +19,8 @@ import java.util.Map;
 @Controller
 public class UfcTrackerController {
 
+    private static final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(UfcTrackerController.class);
+
     @Autowired
     IFighterService fighterService;
     @Autowired
@@ -61,14 +63,22 @@ public class UfcTrackerController {
         return weightClassService.fetchAll();
     }
 
+    /**
+     * Save a new fighter or update an existing one
+     * @param fighter The fighter object to save
+     * @param model Spring MVC Model object for passing error messages
+     * @return The view name to render
+     */
     @RequestMapping("/saveFighter")
-    public String saveFighter(Fighter fighter) {
+    public String saveFighter(Fighter fighter, Model model) {
         try {
             fighterService.save(fighter);
+            model.addAttribute("message", "Fighter saved successfully");
         }
         catch (Exception e) {
-            e.printStackTrace();
-            return "start";
+            // Log the error using a proper logging framework
+            logger.error("Error saving fighter: " + e.getMessage(), e);
+            model.addAttribute("error", "Failed to save fighter: " + e.getMessage());
         }
         return "start";
     }
@@ -85,9 +95,13 @@ public class UfcTrackerController {
         return "start";
     }
 
+    /**
+     * Fetch a fighter by their ID
+     * @param id The unique identifier of the fighter
+     * @return ResponseEntity containing the fighter if found, or appropriate error response
+     */
     @GetMapping("/fighter/{id}")
-    public ResponseEntity fetchFighterById(@PathVariable("id") int id)
-    {
+    public ResponseEntity<Fighter> fetchFighterById(@PathVariable("id") int id) {
         Fighter foundFIghter = fighterService.fetchById(id);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -126,7 +140,7 @@ public class UfcTrackerController {
         }
         catch(Exception e){
             //TODO add logging
-    }
+        }
         return newWeightClass;
     }
 
