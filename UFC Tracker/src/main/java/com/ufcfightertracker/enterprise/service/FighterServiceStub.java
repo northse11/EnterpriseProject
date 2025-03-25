@@ -45,16 +45,6 @@ public class FighterServiceStub implements IFighterService {
 
     @Override
     public Fighter fetchByName(String name) {
-        Fighter fighter = new Fighter();
-        fighter.setId(2);
-        fighter.setName("Max Holloway");
-        fighter.setAge(33);
-        fighter.setWeight(135.00);
-        fighter.setStyle("Striker");
-        fighter.setWins(26);
-        fighter.setLosses(8);
-        fighter.setTies(0);
-        fighter.setRank(2);
-        return fighter;
+        return fighterDAO.fetchByName(name);
     }
 }

@@ -13,4 +13,6 @@ public interface iFighterDAO {
     Fighter fetch(int id);
 
     void delete(int id);
+
+    Fighter fetchByName(String name);
 }
