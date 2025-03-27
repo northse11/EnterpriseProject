@@ -34,4 +34,15 @@ public class FighterDAOStub implements iFighterDAO {
     public void delete(int id) {
         allFighters.remove(id);
     }
+
+    @Override
+    public Fighter fetchByName(String name) {
+        List<Fighter> fighters = new ArrayList(allFighters.values());
+        for (Fighter fighter : fighters) {
+            if (fighter.getName().equals(name)) {
+                return fighter;
+            }
+        }
+        return null;
+    }
 }

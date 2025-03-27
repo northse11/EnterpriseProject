@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -41,11 +43,6 @@ public class UfcTrackerController {
         fighter.setTies(0);
         fighter.setRank(2);
         model.addAttribute(fighter);
-        WeightClass weightClass = new WeightClass();
-        weightClass.setWeightClassId(1);
-        weightClass.setWeightClassName("Bantamweight");
-        weightClass.setMinWeight(140);
-        weightClass.setMaxWeight(145);
         return "start";
     }
 
@@ -153,18 +150,48 @@ public class UfcTrackerController {
         }
     }
 
+    @GetMapping(value="/fighters", consumes = "application/json", produces = "application/json")
+    public ResponseEntity searchFighters(@RequestParam(value="searchTerm", required=false, defaultValue="None") String searchTerm){
+        try{
+            List<Fighter> fighters = fighterService.fetchAll();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            return new ResponseEntity(fighters, headers, HttpStatus.OK);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/fighters")
-    public ResponseEntity searchFighters(@RequestParam Map<String,String> requestParams){
-        return new ResponseEntity(HttpStatus.OK);
+    public String searchFighters(@RequestParam(value="searchTerm", required=false, defaultValue="None") String searchTerm, Model model){
+        try{
+            if(searchTerm.equals("None")){
+                List<WeightClass> weightClasses = weightClassService.fetchAll();
+                model.addAttribute("weightClasses", weightClasses);
+                return "weightClasses";
+            }
+            else if(fighterService.fetchByName(searchTerm) == null){
+                return "error";
+            }
+            else {
+                List<Fighter> fighters = new ArrayList<>();
+                fighters.add(fighterService.fetchByName(searchTerm));
+                model.addAttribute("fighters", fighters);
+                return "fighters";
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return "error";
+        }
     }
 
-    @GetMapping("/weightClasses")
-    public ResponseEntity searchWeightClasses(@RequestParam Map<String,String> requestParams){
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-    @RequestMapping("/sustainability")
-    public String sustainability() {
-        return "sustainability";
+    @RequestMapping("/weightClasses")
+    public String weightClasses(Model model) {
+        List<WeightClass> weightClasses = weightClassService.fetchAll();
+        model.addAttribute("weightClasses", weightClasses);
+        return "weightClasses";
     }
 }

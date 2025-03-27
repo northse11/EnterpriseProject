@@ -18,11 +18,4 @@ public interface IWeightClassService {
     WeightClass save(WeightClass weightClass) throws Exception;
 
     List<WeightClass> fetchAll();
-
-    /**
-     * Fetch a weight class with given Name
-     * @param name the name of the weight class
-     * @return the matching weight class or null if no matches found
-     */
-    WeightClass fetchByName(String name);
 }
