@@ -162,6 +162,14 @@ public class UfcTrackerController {
         }
     }
 
+    @GetMapping("/fightersByWeight/{weightClassId}")
+    public String getFightersByWeightClass(@PathVariable int weightClassId, Model model) {
+        List<Fighter> fighters = fighterService.fetchAll();
+        fighters.removeIf(fighter -> fighter.getWeightClassId() != weightClassId);
+        model.addAttribute("fighters", fighters);
+        return "fightersByWeight";
+    }
+
     @RequestMapping("/weightClasses")
     public String weightClasses(Model model) {
         List<WeightClass> weightClasses = weightClassService.fetchAll();

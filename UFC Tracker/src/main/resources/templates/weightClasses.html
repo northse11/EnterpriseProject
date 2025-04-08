@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-<meta charset="UTF-8">
 <title>UFC Fighter Tracker</title>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -20,8 +19,8 @@
 A list of weight classes
 
 <div class="list-group" th:each="weightClass : ${weightClasses}">
-    <a href="#" class="list-group-item list-group-item-action">
-        <p th:text="${weightClass}"/>
+    <a th:href="@{/fightersByWeight/{weightClassId}(weightClassId=${weightClass.weightClassId})}" class="list-group-item list-group-item-action">
+    <p th:text="${weightClass}"/>
     </a>
 </div>
 
