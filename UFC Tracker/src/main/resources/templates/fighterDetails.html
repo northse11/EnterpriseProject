@@ -10,20 +10,21 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
-    <meta charset="UTF-8">
-    <title>UFC Fighter Tracker</title>
-</head>
 <body>
 <div th:replace="fragments/topnav :: navbar">
-
 </div>
 
 <br/>
 
-<div class="list-group" th:each="fighter : ${fighters}">
-  <a th:href="@{/fighters/{id}(id=${fighter.id})}" class="list-group-item list-group-item-action">
-    <p th:text="${fighter.name}"></p>
-  </a>
-</div>
+<h2 th:text="${fighter.name}">Fighter Name</h2>
+<p><strong>Age:</strong> <span th:text="${fighter.age}">Age</span></p>
+<p><strong>Weight:</strong> <span th:text="${fighter.weight}">Weight</span></p>
+<p><strong>Style:</strong> <span th:text="${fighter.style}">Style</span></p>
+<p><strong>Wins:</strong> <span th:text="${fighter.wins}">Wins</span></p>
+<p><strong>Losses:</strong> <span th:text="${fighter.losses}">Losses</span></p>
+<p><strong>Ties:</strong> <span th:text="${fighter.ties}">Ties</span></p>
+<p><strong>Rank:</strong> <span th:text="${fighter.rank}">Rank</span></p>
+
+
 </body>
 </html>

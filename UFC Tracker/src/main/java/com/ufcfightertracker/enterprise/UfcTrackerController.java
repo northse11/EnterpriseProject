@@ -176,4 +176,11 @@ public class UfcTrackerController {
         model.addAttribute("weightClasses", weightClasses);
         return "weightClasses";
     }
+
+    @GetMapping("/fighters/{id}")
+    public String getFighterDetails(@PathVariable int id, Model model) {
+        Fighter fighter = fighterService.fetchById(id);
+        model.addAttribute("fighter", fighter);
+        return "fighterDetails";
+    }
 }

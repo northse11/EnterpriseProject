@@ -26,4 +26,8 @@ public class Fighter {
 
     @Version
     private int version;
+
+    public String toString(){
+        return name;
+    }
 }
