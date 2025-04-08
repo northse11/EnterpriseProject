@@ -16,13 +16,7 @@
 
     <p th:text="${fighter}"/>
 
-    <form action="#" th:action="@{/saveFighter}" th:object="${fighter}" method="GET">
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="id">Fighter ID</span>
-            </div>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="id" th:field="*{id}"/>
-        </div>
+    <form action="#" th:action="@{/saveFighter}" th:object="${fighter}" method="POST">
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="name">Name</span>
