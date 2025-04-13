@@ -18,8 +18,8 @@
 <br/>
 
 <div class="list-group" th:each="fighter : ${fighters}">
-    <a href="#" class="list-group-item list-group-item-action">
-        <p th:text="${fighter}"/>
+    <a th:href="@{/fighters/{id}(id=${fighter.id})}" class="list-group-item list-group-item-action">
+        <p th:text="${fighter.name}"></p>
     </a>
 </div>
 

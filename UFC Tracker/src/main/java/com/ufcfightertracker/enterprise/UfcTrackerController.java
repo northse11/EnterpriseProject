@@ -31,19 +31,15 @@ public class UfcTrackerController {
      * @return
      */
     @RequestMapping("/")
-    public String index(Model model) {
-        Fighter fighter = new Fighter();
-        fighter.setId(2);
-        fighter.setName("Max Holloway");
-        fighter.setAge(33);
-        fighter.setWeight(135.00);
-        fighter.setStyle("Striker");
-        fighter.setWins(26);
-        fighter.setLosses(8);
-        fighter.setTies(0);
-        fighter.setRank(2);
-        model.addAttribute(fighter);
+    public String index() {
         return "start";
+    }
+
+    @RequestMapping("/addFighter")
+    public String addFighter(Model model) {
+        Fighter fighter = new Fighter();
+        model.addAttribute(fighter);
+        return "addFighter";
     }
 
     @GetMapping("/fighter")
@@ -74,9 +70,8 @@ public class UfcTrackerController {
     }
 
     @PostMapping(value="/saveFighter")
-    public String createFighter(@ModelAttribute Fighter fighter)
+    public String createFighter(@ModelAttribute Fighter fighter, Model model)
     {
-        Fighter newFighter = null;
         try{
             double weight = fighter.getWeight();
             if(116.0 <= weight  && weight <= 125.0){
@@ -103,13 +98,15 @@ public class UfcTrackerController {
             if(206.0 <= weight  && weight <= 265.0){
                 fighter.setWeightClassId(8);
             }
-            newFighter = fighterService.save(fighter);
+            fighterService.save(fighter);
+            model.addAttribute("fighter", new Fighter());
+            model.addAttribute("successMessage", "Fighter added successfully!");
         }
         catch(Exception e){
             e.printStackTrace();
             return "start";
         }
-        return "start";
+        return "addFighter";
     }
 
     @DeleteMapping("/fighter/{id}")
