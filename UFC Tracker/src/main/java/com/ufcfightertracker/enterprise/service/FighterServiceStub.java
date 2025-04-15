@@ -29,8 +29,9 @@ public class FighterServiceStub implements IFighterService {
     }
 
     @Override
-    public void delete(int id)throws Exception {
+    public boolean delete(int id)throws Exception {
         fighterDAO.delete(id);
+        return true;
     }
 
     @Override

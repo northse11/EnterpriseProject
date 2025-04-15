@@ -13,9 +13,23 @@ public interface IWeightClassService {
      */
     WeightClass getWeightClassById(int id);
 
-    void delete(int id) throws Exception;
+    /**
+     * Deletes a weight class with specified ID
+     * @param id a unique identifier for each weight class
+     * @return true if fighter deletion was successful, false if not found or failed
+     */
+    boolean delete(int id) throws Exception;
 
+    /**
+     * Posts provided weight class to database
+     * @param weightClass data of weight to be added
+     * @return weightClass data that was entered, null if unsuccessful
+     */
     WeightClass save(WeightClass weightClass) throws Exception;
 
+    /**
+     * Fetches all weight classes in database
+     * @return list of all fighters
+     */
     List<WeightClass> fetchAll();
 }
