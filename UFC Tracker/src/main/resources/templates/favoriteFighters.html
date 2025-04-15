@@ -17,24 +17,15 @@
 
 <!-- Main Content Container -->
 <div class="container my-5">
-  <h2 class="text-center mb-4" th:text="${fighter.name}">Fighter Name</h2>
+  <h2 class="text-center mb-4">List of UFC Fighters</h2>
 
+  <!-- Fighter List -->
   <div class="list-group">
-    <p class="list-group-item"><strong>Age:</strong> <span th:text="${fighter.age}">Age</span></p>
-    <p class="list-group-item"><strong>Weight:</strong> <span th:text="${fighter.weight}">Weight</span></p>
-    <p class="list-group-item"><strong>Style:</strong> <span th:text="${fighter.style}">Style</span></p>
-    <p class="list-group-item"><strong>Wins:</strong> <span th:text="${fighter.wins}">Wins</span></p>
-    <p class="list-group-item"><strong>Losses:</strong> <span th:text="${fighter.losses}">Losses</span></p>
-    <p class="list-group-item"><strong>Ties:</strong> <span th:text="${fighter.ties}">Ties</span></p>
-    <p class="list-group-item"><strong>Rank:</strong> <span th:text="${fighter.rank}">Rank</span></p>
-    <p class="list-group-item"><strong>Favorite:</strong> <span th:text="${fighter.favorite}">Favorite</span></p>
-  </div>
-
-  <!-- Favorite Button -->
-  <div class="text-center mt-4">
-    <form th:action="@{'/fighters/' + ${fighter.id} + '/toggle-favorite'}" method="post">
-      <button class="btn btn-primary" type="submit" name="submit" value="0">Toggle Favorite</button>
-    </form>
+    <div th:each="fighter : ${fighters}">
+      <a th:href="@{/fighters/{id}(id=${fighter.id})}" class="list-group-item list-group-item-action mb-2 shadow-sm">
+        <p th:text="${fighter.name}" class="m-0"></p>
+      </a>
+    </div>
   </div>
 </div>
 

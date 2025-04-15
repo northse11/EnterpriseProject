@@ -138,17 +138,16 @@ public class UfcTrackerController {
     @GetMapping("/fighters")
     public String searchFighters(@RequestParam(value="searchTerm", required=false, defaultValue="None") String searchTerm, Model model){
         try{
+            List<Fighter> fighters = fighterService.fetchByName(searchTerm);
             if(searchTerm.equals("None")){
-                List<Fighter> fighters = fighterService.fetchAll();
+                fighters = fighterService.fetchAll();
                 model.addAttribute("fighters", fighters);
                 return "fighters";
             }
             else if(fighterService.fetchByName(searchTerm) == null){
                 return "error";
             }
-            else {
-                List<Fighter> fighters = new ArrayList<>();
-                fighters.add(fighterService.fetchByName(searchTerm));
+            else{
                 model.addAttribute("fighters", fighters);
                 return "fighters";
             }
@@ -167,6 +166,15 @@ public class UfcTrackerController {
         return "fightersByWeight";
     }
 
+    @GetMapping("/favoriteFighters")
+    public String getFavoriteFighters(Model model) {
+        Integer favorite = 1;
+        List<Fighter> fighters = fighterService.fetchAll();
+        fighters.removeIf(fighter -> fighter.getFavorite() != favorite);
+        model.addAttribute("fighters", fighters);
+        return "favoriteFighters";
+    }
+
     @RequestMapping("/weightClasses")
     public String weightClasses(Model model) {
         List<WeightClass> weightClasses = weightClassService.fetchAll();
@@ -177,6 +185,26 @@ public class UfcTrackerController {
     @GetMapping("/fighters/{id}")
     public String getFighterDetails(@PathVariable int id, Model model) {
         Fighter fighter = fighterService.fetchById(id);
+        model.addAttribute("fighter", fighter);
+        return "fighterDetails";
+    }
+
+    @PostMapping("/fighters/{id}/toggle-favorite")
+    public String toggleFavorite(@PathVariable int id, Model model) {
+        Fighter fighter = fighterService.fetchById(id);
+        if(fighter.getFavorite() == 0) {
+            fighter.setFavorite(1);
+        }
+        else {
+            fighter.setFavorite(0);
+        }
+        try {
+            fighterService.save(fighter);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
         model.addAttribute("fighter", fighter);
         return "fighterDetails";
     }

@@ -39,7 +39,7 @@ public class FighterSQLDAO implements iFighterDAO {
     }
 
     @Override
-    public Fighter fetchByName(String name) {
+    public List<Fighter> fetchByName(String name) {
         return fighterRepository.findByName(name);
     }
 

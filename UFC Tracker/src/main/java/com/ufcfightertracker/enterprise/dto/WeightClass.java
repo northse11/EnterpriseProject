@@ -16,7 +16,7 @@ public @Data class WeightClass {
     }
 
     public String toString(){
-        return weightClassName;
+        return weightClassName + ": (" + minWeight + "lbs - " + maxWeight + "lbs)";
     }
 }
 

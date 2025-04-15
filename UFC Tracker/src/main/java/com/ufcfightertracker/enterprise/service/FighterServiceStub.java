@@ -1,13 +1,10 @@
 package com.ufcfightertracker.enterprise.service;
 
 import com.ufcfightertracker.enterprise.dao.FighterRepository;
-import com.ufcfightertracker.enterprise.dao.iFighterDAO;
 import com.ufcfightertracker.enterprise.dto.Fighter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -41,7 +38,7 @@ public class FighterServiceStub implements IFighterService {
     }
 
     @Override
-    public Fighter fetchByName(String name) {
+    public List<Fighter> fetchByName(String name) {
         return fighterRepository.findByName(name) ;
     }
 }

@@ -16,12 +16,20 @@
 </div>
 
 <br/>
-A list of weight classes
 
-<div class="list-group" th:each="weightClass : ${weightClasses}">
-    <a th:href="@{/fightersByWeight/{weightClassId}(weightClassId=${weightClass.weightClassId})}" class="list-group-item list-group-item-action">
-    <p th:text="${weightClass}"/>
-    </a>
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Select a Weight Class</h2>
+
+    <div class="list-group">
+        <a
+                th:each="weightClass : ${weightClasses}"
+                th:href="@{/fightersByWeight/{weightClassId}(weightClassId=${weightClass.weightClassId})}"
+                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+        >
+            <span th:text="${weightClass}"></span>
+            <span class="badge badge-primary badge-pill">View Fighters</span>
+        </a>
+    </div>
 </div>
 
 </body>

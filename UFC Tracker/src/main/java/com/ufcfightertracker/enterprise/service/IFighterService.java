@@ -21,8 +21,9 @@ public interface IFighterService {
 
     /**
      * Fetch a fighter with given Name
+     *
      * @param name the name of the fighter
      * @return the matching fighter or null if no matches found
      */
-    Fighter fetchByName(String name);
+    List<Fighter> fetchByName(String name);
 }

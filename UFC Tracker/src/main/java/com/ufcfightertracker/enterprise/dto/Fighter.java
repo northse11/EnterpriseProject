@@ -23,6 +23,7 @@ public class Fighter {
     private int ties;
     @Column(name = "`rank`")
     private int rank;
+    private Integer favorite;
 
     @Version
     private int version;

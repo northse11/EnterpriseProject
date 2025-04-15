@@ -10,64 +10,89 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
 <body>
-<div th:replace="fragments/topnav :: navbar">
 
-</div>
+<!-- Top Navigation Bar -->
+<div th:replace="fragments/topnav :: navbar"></div>
 
+<!-- Success Message -->
 <div th:if="${successMessage}" class="alert alert-success" role="alert">
   <span th:text="${successMessage}"></span>
 </div>
 
-<form action="#" th:action="@{/saveFighter}" th:object="${fighter}" method="POST">
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="name">Name</span>
+<!-- Main Form Container -->
+<div class="container my-5">
+  <h2 class="text-center mb-4">Add New UFC Fighter</h2>
+
+  <!-- Form -->
+  <form action="#" th:action="@{/saveFighter}" th:object="${fighter}" method="POST">
+    <div class="form-row">
+      <!-- Name Field -->
+      <div class="form-group col-md-6">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="Enter fighter's name"/>
+      </div>
+
+      <!-- Age Field -->
+      <div class="form-group col-md-6">
+        <label for="age">Age</label>
+        <input type="number" class="form-control" id="age" name="age" th:field="*{age}" placeholder="Enter fighter's age"/>
+      </div>
     </div>
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="name" th:field="*{name}"/>
-  </div>
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="age">Age</span>
+
+    <div class="form-row">
+      <!-- Weight Field -->
+      <div class="form-group col-md-6">
+        <label for="weight">Weight</label>
+        <input type="number" class="form-control" id="weight" name="weight" th:field="*{weight}" placeholder="Enter fighter's weight"/>
+      </div>
+
+      <!-- Style Field -->
+      <div class="form-group col-md-6">
+        <label for="style">Style</label>
+        <input type="text" class="form-control" id="style" name="style" th:field="*{style}" placeholder="Enter fighter's style"/>
+      </div>
     </div>
-    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="age" th:field="*{age}"/>
-  </div>
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="weight">Weight</span>
+
+    <div class="form-row">
+      <!-- Wins Field -->
+      <div class="form-group col-md-4">
+        <label for="wins">Wins</label>
+        <input type="number" class="form-control" id="wins" name="wins" th:field="*{wins}" placeholder="Enter number of wins"/>
+      </div>
+
+      <!-- Losses Field -->
+      <div class="form-group col-md-4">
+        <label for="losses">Losses</label>
+        <input type="number" class="form-control" id="losses" name="losses" th:field="*{losses}" placeholder="Enter number of losses"/>
+      </div>
+
+      <!-- Ties Field -->
+      <div class="form-group col-md-4">
+        <label for="ties">Ties</label>
+        <input type="number" class="form-control" id="ties" name="ties" th:field="*{ties}" placeholder="Enter number of ties"/>
+      </div>
     </div>
-    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="weight" th:field="*{weight}"/>
-  </div>
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="style">Style</span>
+
+    <div class="form-row">
+      <!-- Rank Field -->
+      <div class="form-group col-md-6">
+        <label for="rank">Rank</label>
+        <input type="number" class="form-control" id="rank" name="rank" th:field="*{rank}" placeholder="Enter fighter's rank"/>
+      </div>
+
+      <!-- Favorite Field -->
+      <div class="form-group col-md-6">
+        <label for="favorite">Favorite (1 for yes)</label>
+        <input type="number" class="form-control" id="favorite" name="favorite" th:field="*{favorite}" placeholder="Is this fighter a favorite?"/>
+      </div>
     </div>
-    <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="style" th:field="*{style}"/>
-  </div>
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="wins">Wins</span>
+
+    <!-- Submit Button -->
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
     </div>
-    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="wins" th:field="*{wins}"/>
-  </div>
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="losses">Losses</span>
-    </div>
-    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="losses" th:field="*{losses}"/>
-  </div>
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="ties">Ties</span>
-    </div>
-    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="ties" th:field="*{ties}"/>
-  </div>
-  <div class="input-group input-group-sm mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="rank">Rank</span>
-    </div>
-    <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="rank" th:field="*{rank}"/>
-  </div>
-  <button name="submit" type="submit" value="0">Submit</button>
-</form>
+  </form>
+</div>
+
 </body>
 </html>
