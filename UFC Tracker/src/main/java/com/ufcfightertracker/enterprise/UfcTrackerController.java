@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ public class UfcTrackerController {
     public String index(Model model) {
         List<Fighter> fighters = fighterService.fetchAll();
         fighters.removeIf(fighter -> fighter.getRank() != 1);
+        fighters.sort(Comparator.comparing(Fighter::getWeightClassId));
         model.addAttribute("fighters", fighters);
         return "start";
     }
