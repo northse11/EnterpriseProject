@@ -19,12 +19,11 @@
 <div class="container my-5">
     <h2 class="text-center mb-4">Fighters List</h2>
 
+    <!-- Fighter List -->
     <div class="list-group">
-        <!-- Iterate over the fighters list -->
         <div th:each="fighter : ${fighters}">
-            <a th:href="@{/fighters/{id}(id=${fighter.id})}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                <span th:text="${fighter.name}">Fighter Name</span>
-                <span class="badge badge-primary badge-pill">View</span>
+            <a th:href="@{/fighters/{id}(id=${fighter.id})}" class="list-group-item list-group-item-action mb-2 shadow-sm">
+                <p th:text="${fighter.name}" class="m-0"></p>
             </a>
         </div>
     </div>

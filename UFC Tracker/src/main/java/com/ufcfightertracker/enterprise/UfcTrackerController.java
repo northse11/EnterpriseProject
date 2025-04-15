@@ -31,7 +31,10 @@ public class UfcTrackerController {
      * @return
      */
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+        List<Fighter> fighters = fighterService.fetchAll();
+        fighters.removeIf(fighter -> fighter.getRank() != 1);
+        model.addAttribute("fighters", fighters);
         return "start";
     }
 
