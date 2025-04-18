@@ -1,8 +1,10 @@
 package com.ufcfightertracker.enterprise;
 
 import com.ufcfightertracker.enterprise.dto.Fighter;
+import com.ufcfightertracker.enterprise.dto.User;
 import com.ufcfightertracker.enterprise.dto.WeightClass;
 import com.ufcfightertracker.enterprise.service.IFighterService;
+import com.ufcfightertracker.enterprise.service.IUserService;
 import com.ufcfightertracker.enterprise.service.IWeightClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -26,6 +28,8 @@ public class UfcTrackerController {
     IFighterService fighterService;
     @Autowired
     IWeightClassService weightClassService;
+    @Autowired
+    IUserService userService;
 
     /**
      * Handle the root (/) endpoint and return a start page.
@@ -112,6 +116,21 @@ public class UfcTrackerController {
             return "start";
         }
         return "addFighter";
+    }
+
+    @RequestMapping("/login")
+    public String createUser(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "login";
+    }
+
+    @PostMapping(value="/signup")
+    public String createUser(@ModelAttribute User user, Model model)
+    {
+       userService.save(user);
+       model.addAttribute("user", new User());
+       return "login";
     }
 
     @DeleteMapping("/fighter/{id}")
