@@ -19,6 +19,10 @@
 <div class="container my-5">
   <h2 class="text-center mb-4">Favorite Fighters</h2>
 
+  <div id="statusMessage" th:if="${statusMessage}" class="alert alert-danger text-center" role="alert">
+    <span th:text="${statusMessage}"></span>
+  </div>
+
   <!-- Fighter List -->
   <div class="list-group">
     <div th:each="fighter : ${fighters}">

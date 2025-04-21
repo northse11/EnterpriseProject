@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -237,9 +239,17 @@ public class UfcTrackerController {
 
     @GetMapping("/favoriteFighters")
     public String getFavoriteFighters(Model model) {
-        Integer favorite = 1;
-        List<Fighter> fighters = fighterService.fetchAll();
-        fighters.removeIf(fighter -> fighter.getFavorite() != favorite);
+        String favorites = currentUser.getFavoriteFighters();
+        List<Fighter> fighters = new ArrayList<Fighter>();
+        if(favorites == null || favorites.isEmpty()){
+            model.addAttribute("statusMessage", "You have no favorite fighters yet!");
+        }
+        else {
+            List<Integer> fighterIds = Arrays.stream(favorites.split(",")).map(String::trim).map(Integer::parseInt).toList();
+            for (Integer fighterId : fighterIds) {
+                fighters.add(fighterService.fetchById(fighterId));
+            }
+        }
         model.addAttribute("fighters", fighters);
         return "favoriteFighters";
     }
@@ -261,19 +271,26 @@ public class UfcTrackerController {
     @PostMapping("/fighters/{id}/toggle-favorite")
     public String toggleFavorite(@PathVariable int id, Model model) {
         Fighter fighter = fighterService.fetchById(id);
-        if(fighter.getFavorite() == 0) {
-            fighter.setFavorite(1);
+        String favorites = currentUser.getFavoriteFighters();
+        List<String> fighterIds = new ArrayList<>(Arrays.asList(favorites.split(",")));
+        if(favorites != null && !favorites.isEmpty()) {
+            if (!favorites.contains(Integer.toString(id))) {
+                fighterIds.add(Integer.toString(id));
+            }
+            else{
+                fighterIds.remove(Integer.toString(id));
+            }
         }
-        else {
-            fighter.setFavorite(0);
+        else{
+            favorites = "" + id;
+            currentUser.setFavoriteFighters(favorites);
+            userService.save(currentUser);
+            model.addAttribute("fighter", fighter);
+            return "fighterDetails";
         }
-        try {
-            fighterService.save(fighter);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-            return "error";
-        }
+        favorites = String.join(",", fighterIds);
+        currentUser.setFavoriteFighters(favorites);
+        userService.save(currentUser);
         model.addAttribute("fighter", fighter);
         return "fighterDetails";
     }
