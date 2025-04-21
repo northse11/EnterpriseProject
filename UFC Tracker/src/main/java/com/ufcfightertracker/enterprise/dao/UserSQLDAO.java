@@ -24,4 +24,14 @@ public class UserSQLDAO implements iUserDAO{
     public User findById(int id) {
         return userRepository.findById(id).get();
     }
+
+    @Override
+    public List<User> findAll() {
+        List<User> allUsers = new ArrayList<>();
+        Iterable<User> users = userRepository.findAll();
+        for(User user : users){
+            allUsers.add(user);
+        }
+        return allUsers;
+    }
 }

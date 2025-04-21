@@ -12,14 +12,14 @@
 <body>
 <!-- Main Form Container -->
 <div class="container my-5">
-    <h2 class="text-center mb-4">Existing User</h2>
+    <h2 class="text-center mb-4">New User</h2>
 
     <div id="statusMessage" th:if="${statusMessage}" class="alert alert-danger text-center" role="alert">
         <span th:text="${statusMessage}"></span>
     </div>
 
     <!-- Form -->
-    <form action="#" th:action="@{/login}" th:object="${user}" method="POST">
+    <form action="#" th:action="@{/signup}" th:object="${user}" method="POST">
         <div class="form-row">
             <!-- Username Field -->
             <div class="form-group col-md-6">
@@ -31,10 +31,15 @@
                 <label for="password">Password</label>
                 <input type="text" class="form-control" id="password" name="password" th:field="*{password}" placeholder="Enter password"/>
             </div>
+            <!-- Confirm Password Field -->
+            <div class="form-group col-md-6">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="text" class="form-control" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}" placeholder="Confirm Password"/>
+            </div>
         </div>
         <!-- Submit Button -->
         <div class="form-group text-center">
-            <button type="submit" class="btn btn-primary btn-lg">Log In</button>
+            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
         </div>
     </form>
 </div>

@@ -15,11 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class UfcTrackerController {
@@ -31,17 +28,24 @@ public class UfcTrackerController {
     @Autowired
     IUserService userService;
 
+    User currentUser = null;
+
     /**
      * Handle the root (/) endpoint and return a start page.
      * @return
      */
     @RequestMapping("/")
+    public String index() {
+        return "start";
+    }
+
+    @RequestMapping("/home")
     public String index(Model model) {
         List<Fighter> fighters = fighterService.fetchAll();
         fighters.removeIf(fighter -> fighter.getRank() != 1);
         fighters.sort(Comparator.comparing(Fighter::getWeightClassId));
         model.addAttribute("fighters", fighters);
-        return "start";
+        return "home";
     }
 
     @RequestMapping("/addFighter")
@@ -118,8 +122,15 @@ public class UfcTrackerController {
         return "addFighter";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/signup")
     public String createUser(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        return "signup";
+    }
+
+    @RequestMapping("/login")
+    public String login(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "login";
@@ -128,9 +139,43 @@ public class UfcTrackerController {
     @PostMapping(value="/signup")
     public String createUser(@ModelAttribute User user, Model model)
     {
-       userService.save(user);
-       model.addAttribute("user", new User());
-       return "login";
+        List<User> users = userService.findAll();
+        for(User u : users) {
+            if (u.getUsername().equals(user.getUsername())) {
+                model.addAttribute("statusMessage", "User already exists");
+                return "signup";
+            }
+        }
+        if(!user.getPassword().equals(user.getConfirmPassword())) {
+            model.addAttribute("statusMessage", "Passwords do not match");
+            return "signup";
+        }
+        else{
+        userService.save(user);
+        currentUser = user;
+        List<Fighter> fighters = fighterService.fetchAll();
+        fighters.removeIf(fighter -> fighter.getRank() != 1);
+        fighters.sort(Comparator.comparing(Fighter::getWeightClassId));
+        model.addAttribute("fighters", fighters);
+        return "home";
+}
+    }
+
+    @PostMapping(value="/login")
+    public String login(@ModelAttribute User user, Model model) {
+        List<User> users = userService.findAll();
+        for(User u : users) {
+            if(u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword())) {
+                currentUser = u;
+                List<Fighter> fighters = fighterService.fetchAll();
+                fighters.removeIf(fighter -> fighter.getRank() != 1);
+                fighters.sort(Comparator.comparing(Fighter::getWeightClassId));
+                model.addAttribute("fighters", fighters);
+                return "home";
+            }
+        }
+        model.addAttribute("statusMessage", "Incorrect username or password");
+        return "login";
     }
 
     @DeleteMapping("/fighter/{id}")
@@ -231,5 +276,11 @@ public class UfcTrackerController {
         }
         model.addAttribute("fighter", fighter);
         return "fighterDetails";
+    }
+
+    @RequestMapping("/signout")
+    public String SignOut() {
+        currentUser = null;
+        return "start";
     }
 }

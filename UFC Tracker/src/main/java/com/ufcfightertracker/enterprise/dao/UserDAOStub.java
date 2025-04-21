@@ -5,7 +5,9 @@ import com.ufcfightertracker.enterprise.dto.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class UserDAOStub implements iUserDAO {
@@ -21,5 +23,11 @@ public class UserDAOStub implements iUserDAO {
     @Override
     public User findById(int id) {
         return allUsers.get(id);
+    }
+
+    @Override
+    public List<User> findAll() {
+        List<User> returnUsers = new ArrayList(allUsers.values());
+        return returnUsers;
     }
 }
