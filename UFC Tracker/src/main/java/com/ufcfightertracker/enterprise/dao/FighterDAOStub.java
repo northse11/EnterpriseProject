@@ -36,13 +36,13 @@ public class FighterDAOStub implements iFighterDAO {
     }
 
     @Override
-    public Fighter fetchByName(String name) {
+    public List<Fighter> fetchByName(String name) {
         List<Fighter> fighters = new ArrayList(allFighters.values());
         for (Fighter fighter : fighters) {
-            if (fighter.getName().equals(name)) {
-                return fighter;
+            if(!fighter.getName().toLowerCase().contains(name.toLowerCase())) {
+                fighters.remove(fighter);
             }
         }
-        return null;
+        return fighters;
     }
 }

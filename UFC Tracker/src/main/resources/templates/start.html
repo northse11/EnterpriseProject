@@ -10,68 +10,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div th:replace="fragments/topnav :: navbar">
-
+<div class="container text-center mt-5">
+    <h1>Welcome to the UFC Fighter Tracker</h1>
+    <div class="mt-4">
+        <a href="/signup" class="btn btn-primary btn-lg mr-2">Sign Up</a>
+        <a href="/login" class="btn btn-success btn-lg">Log In</a>
     </div>
-
-    <p th:text="${fighter}"/>
-
-    <form action="#" th:action="@{/saveFighter}" th:object="${fighter}" method="GET">
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="id">Fighter ID</span>
-            </div>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="id" th:field="*{id}"/>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="name">Name</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="name" th:field="*{name}"/>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="age">Age</span>
-            </div>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="age" th:field="*{age}"/>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="weight">Weight</span>
-            </div>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="weight" th:field="*{weight}"/>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="style">Style</span>
-            </div>
-            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="style" th:field="*{style}"/>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="wins">Wins</span>
-            </div>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="wins" th:field="*{wins}"/>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="losses">Losses</span>
-            </div>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="losses" th:field="*{losses}"/>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="ties">Ties</span>
-            </div>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="ties" th:field="*{ties}"/>
-        </div>
-        <div class="input-group input-group-sm mb-3">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="rank">Rank</span>
-            </div>
-            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" name="rank" th:field="*{rank}"/>
-        </div>
-        <button name="submit" type="submit" value="0">Submit</button>
-    </form>
+</div>
 </body>
 </html>

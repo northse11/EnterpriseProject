@@ -13,16 +13,30 @@ public interface IFighterService {
      */
     Fighter fetchById(int id);
 
+    /**
+     * Delete a fighter with a given id
+     * @param id a unique identifier for each fighter
+     */
     void delete(int id) throws Exception;
 
+    /**
+     * Save a fighter
+     * @param fighter the fighter object passed in to be saved
+     * @return the newly saved fighter
+     */
     Fighter save(Fighter fighter) throws Exception;
 
+    /**
+     * Fetches all fighters
+     * @return list of fighters
+     */
     List<Fighter> fetchAll();
 
     /**
      * Fetch a fighter with given Name
+     *
      * @param name the name of the fighter
      * @return the matching fighter or null if no matches found
      */
-    Fighter fetchByName(String name);
+    List<Fighter> fetchByName(String name);
 }

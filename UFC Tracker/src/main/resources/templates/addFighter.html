@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>UFC Fighter Tracker</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- Top Navigation Bar -->
+<div th:replace="fragments/topnav :: navbar"></div>
+
+<!-- Success Message -->
+<div th:if="${successMessage}" class="alert alert-success" role="alert">
+  <span th:text="${successMessage}"></span>
+</div>
+
+<!-- Main Form Container -->
+<div class="container my-5">
+  <h2 class="text-center mb-4">Add New UFC Fighter</h2>
+
+  <!-- Form -->
+  <form action="#" th:action="@{/saveFighter}" th:object="${fighter}" method="POST">
+    <div class="form-row">
+      <!-- Name Field -->
+      <div class="form-group col-md-6">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" th:field="*{name}" placeholder="Enter fighter's name"/>
+      </div>
+
+      <!-- Age Field -->
+      <div class="form-group col-md-6">
+        <label for="age">Age</label>
+        <input type="number" class="form-control" id="age" name="age" th:field="*{age}" placeholder="Enter fighter's age"/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Weight Field -->
+      <div class="form-group col-md-6">
+        <label for="weight">Weight</label>
+        <input type="number" class="form-control" id="weight" name="weight" th:field="*{weight}" placeholder="Enter fighter's weight"/>
+      </div>
+
+      <!-- Style Field -->
+      <div class="form-group col-md-6">
+        <label for="style">Style</label>
+        <input type="text" class="form-control" id="style" name="style" th:field="*{style}" placeholder="Enter fighter's style"/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Wins Field -->
+      <div class="form-group col-md-4">
+        <label for="wins">Wins</label>
+        <input type="number" class="form-control" id="wins" name="wins" th:field="*{wins}" placeholder="Enter number of wins"/>
+      </div>
+
+      <!-- Losses Field -->
+      <div class="form-group col-md-4">
+        <label for="losses">Losses</label>
+        <input type="number" class="form-control" id="losses" name="losses" th:field="*{losses}" placeholder="Enter number of losses"/>
+      </div>
+
+      <!-- Ties Field -->
+      <div class="form-group col-md-4">
+        <label for="ties">Ties</label>
+        <input type="number" class="form-control" id="ties" name="ties" th:field="*{ties}" placeholder="Enter number of ties"/>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- Rank Field -->
+      <div class="form-group col-md-6">
+        <label for="rank">Rank</label>
+        <input type="number" class="form-control" id="rank" name="rank" th:field="*{rank}" placeholder="Enter fighter's rank"/>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

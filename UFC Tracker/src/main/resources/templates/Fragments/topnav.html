@@ -4,15 +4,63 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/weightClasses">Weight Classes</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/addFighter">Add Fighter</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/favoriteFighters">Favorite Fighters</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/signout">Sign Out</a>
+        </li>
       </ul>
     </div>
     <form class="form-inline" action="#" th:action="@{/fighters}"  method="GET">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"  name="searchTerm" id="searchTerm">
+      <div style="position: relative;">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+               name="searchTerm" id="searchTerm">
+        <div id="autocompleteContainer">
+          <ul id="autocompleteResults" class="list-group"></ul>
+        </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(document).ready(function() {
+          $("#searchTerm").on("input", function() {
+            let query = $(this).val();
+            if (query.length > 2) {
+              $.ajax({
+                url: "/fighterNames",
+                type: "GET",
+                data: { query: query },
+                success: function(data) {
+                  let resultList = $("#autocompleteResults");
+                  resultList.empty();
+
+                  data.forEach(name => {
+                    let item = $("<li>").text(name).addClass("list-group-item");
+                    item.click(function() {
+                      $("#searchTerm").val(name);
+                      resultList.empty();
+                    });
+                    resultList.append(item);
+                  });
+                },
+                error: function() {
+                  console.log("Error retrieving autocomplete results.");
+                }
+              });
+            } else {
+              $("#autocompleteResults").empty();
+            }
+          });
+        });
+      </script>
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </nav>

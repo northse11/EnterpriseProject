@@ -13,9 +13,22 @@ public interface IWeightClassService {
      */
     WeightClass getWeightClassById(int id);
 
+    /**
+     * Delete a weight class with a given ID
+     * @param id a unique identifier for each weight class
+     */
     void delete(int id) throws Exception;
 
+    /**
+     * Saves a weight class
+     * @param weightClass the object data passed in to be saved
+     * @return the newly saved weight class object
+     */
     WeightClass save(WeightClass weightClass) throws Exception;
 
+    /**
+     * Fetches all weight classes
+     * @return list of weight classes
+     */
     List<WeightClass> fetchAll();
 }

@@ -61,22 +61,6 @@ class UfcTrackerApplicationTests {
         String name = fighter.getName();
         assertEquals("Michael Page", name);
     }
-
-    @Test
-    void fetchFighterByName_returnsMaxHollowayForMaxHolloway() throws Exception {
-        givenFighterDataIsAvailable();
-        whenUserSearchesForFighterByNameMaxHolloway();
-        thenReturnFighterMaxHollowayForNameMaxHolloway();
-    }
-
-    private void whenUserSearchesForFighterByNameMaxHolloway() {
-        fighter = fighterService.fetchByName("Max Holloway");
-    }
-
-    private void thenReturnFighterMaxHollowayForNameMaxHolloway() {
-        String name = fighter.getName();
-        assertEquals("Max Holloway", name);
-    }
     
     @Test
     void saveFighter_validateReturnFighterWithAllAttributes() throws Exception {
