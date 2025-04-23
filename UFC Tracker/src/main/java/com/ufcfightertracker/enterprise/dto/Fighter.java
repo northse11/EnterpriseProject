@@ -27,6 +27,10 @@ public class Fighter {
     @Version
     private int version;
 
+    /**
+     * The modified toString method
+     * @return the name of the fighter
+     */
     public String toString(){
         return name;
     }
